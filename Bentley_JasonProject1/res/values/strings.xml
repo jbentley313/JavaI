@@ -3,6 +3,7 @@
 
     <string name="app_name">Bentley_JasonProject1</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="hello_world">Hello world!!!!!!!</string>
+    <string name="welcome_value">My first Java Android App! Please enter your name.&quot;</string>
 
 </resources>
