@@ -4,7 +4,7 @@
     <string name="app_name">proj2</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world! Yo</string>
-    <string name="quiz_scores">Quiz Scores</string>
+    <string name="quiz_scores">Quiz Score</string>
     <string-array name="quiz_view">Please Choose a CoursePlease Choose a CoursePlease Choose a CoursePlease Choose a Course
         <item>Please Choose a Course</item><item >Advanced_Recording</item>
         <item >Sound_Foundations</item>
