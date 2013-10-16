@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">proj2</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world! Yo</string>
+    <string name="quiz_scores">Trade School Grade Sheet</string>
+    <string-array name="quiz_view">Please Choose a CoursePlease Choose a CoursePlease Choose a CoursePlease Choose a Course
+        <item>Please Choose a Course</item><item >Advanced_Recording</item>
+        <item >Sound_Foundations</item>
+        <item >Intro_to_Recording</item>
+        <item >Music_Production</item>
+        
+        
+    </string-array>
+    <string name="IRA">Introduction to Recording</string>
+    <string name="SF">Sound Foundations</string>
+    <string name="ARC">Advanced Recording</string>
+    <string name="lastname">Student last name:</string>
+    <string name="firstName">Student first name:</string>
+    <string name="Score">Score:</string>
+    <string name="Back">Back</string>
+    <string name="Save">Save</string>
+    <string name="dispScore">Display Scores</string>
+    <string name="ARCQuiz">ARCQuiz</string>
+
+</resources>
