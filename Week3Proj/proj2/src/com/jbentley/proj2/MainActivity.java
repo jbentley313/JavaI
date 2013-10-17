@@ -3,7 +3,10 @@ package com.jbentley.proj2;
 import java.util.List;
 
 import com.example.proj2.R;
+import com.example.proj2.R.string;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
@@ -28,6 +31,7 @@ import com.parse.SaveCallback;
 public class MainActivity extends Activity {
 	Context mContext;
 	String[] mListItems;
+	static String TAG = "NETWORK DATA - MAINACTIVITY";
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
@@ -484,32 +488,53 @@ public class MainActivity extends Activity {
 	// Save to parse function
 	public void saveToParse(String pScore, String pLname, String pFname,
 			String pQDesc) {
+		if (connectionStatus(mContext)) {
+			ParseObject quizScore = new ParseObject(pQDesc);
+			quizScore.put("score", pScore);
+			quizScore.put("lastname", pLname);
+			quizScore.put("firstname", pFname);
+			quizScore.put("quizDescription", pQDesc);
+			quizScore.saveInBackground(new SaveCallback() {
+				//
+				public void done(ParseException e) {
+					if (e != null) {
 
-		ParseObject quizScore = new ParseObject(pQDesc);
-		quizScore.put("score", pScore);
-		quizScore.put("lastname", pLname);
-		quizScore.put("firstname", pFname);
-		quizScore.put("quizDescription", pQDesc);
-		quizScore.saveInBackground(new SaveCallback() {
-			//
-			public void done(ParseException e) {
-				if (e != null) {
+						System.out.println("error saving!!!!!");
+						Toast.makeText(mContext,
+								"Sorry, the score did NOT save.",
+								Toast.LENGTH_LONG).show();
+					} else {
+						System.out.println("success saving!!");
+						Toast.makeText(mContext, "Success Saving Score!",
+								Toast.LENGTH_LONG).show();
 
-					System.out.println("error saving!!!!!");
-					Toast.makeText(mContext, "Sorry, the score did NOT save.",
-							Toast.LENGTH_LONG).show();
-				} else {
-					System.out.println("success saving!!");
-					Toast.makeText(mContext, "Success Saving Score!",
-							Toast.LENGTH_LONG).show();
-
+					}
 				}
-			}
 
-		});
+			});
 
+		} else {
+			Toast.makeText(mContext,
+					"No Network connection! \nNetwork connection is required to save a score.",
+					Toast.LENGTH_LONG).show();
+		}
 	}
 
-	
+	public Boolean connectionStatus(Context mContext) {
+
+		Boolean conn = false;
+		ConnectivityManager conMan = (ConnectivityManager) mContext
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo netInfo = conMan.getActiveNetworkInfo();
+		if (netInfo != null) {
+			if (netInfo.isConnected()) {
+				Log.i(TAG, "connection type: " + netInfo.getTypeName());
+				conn = true;
+			}
+		}
+
+		return conn;
+
+	}
 
 }
