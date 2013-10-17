@@ -3,8 +3,6 @@ package com.jbentley.proj2;
 import java.util.List;
 
 import com.example.proj2.R;
-import com.example.proj2.R.string;
-
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -150,42 +148,51 @@ public class MainActivity extends Activity {
 
 					@Override
 					public void onClick(View v) {
-						// TODO Auto-generated method stub
-						ParseQuery<ParseObject> query = ParseQuery
-								.getQuery("IRAQuiz");
-						query.findInBackground(new FindCallback<ParseObject>() {
-							public void done(List<ParseObject> quizScoreList,
-									ParseException e) {
-								if (e == null) {
-									Log.d("score",
-											"Retrieved " + quizScoreList.size()
-													+ " scores");
+						if (connectionStatus(mContext)) {
+							// TODO Auto-generated method stub
+							ParseQuery<ParseObject> query = ParseQuery
+									.getQuery("IRAQuiz");
+							query.findInBackground(new FindCallback<ParseObject>() {
+								public void done(
+										List<ParseObject> quizScoreList,
+										ParseException e) {
+									if (e == null) {
+										Log.d("score", "Retrieved "
+												+ quizScoreList.size()
+												+ " scores");
 
-									myLinLayout.removeView(finalTextView);
-									myLinLayout.addView(finalTextView);
-									for (ParseObject scoreInfo : quizScoreList) {
-										final String firstname = scoreInfo
-												.getString("firstname");
-										String lastname = scoreInfo
-												.getString("lastname");
-										String score = scoreInfo
-												.getString("score");
-										// String testDesc =
-										// scoreInfo.getString("quizDescription");
+										myLinLayout.removeView(finalTextView);
+										myLinLayout.addView(finalTextView);
+										for (ParseObject scoreInfo : quizScoreList) {
+											final String firstname = scoreInfo
+													.getString("firstname");
+											String lastname = scoreInfo
+													.getString("lastname");
+											String score = scoreInfo
+													.getString("score");
+											// String testDesc =
+											// scoreInfo.getString("quizDescription");
 
-										finalTextView.setText(lastname + ", "
-												+ firstname + "     " + score
-												+ "\n"
-												+ finalTextView.getText());
-										System.out.println(firstname);
+											finalTextView.setText(lastname
+													+ ", " + firstname
+													+ "     " + score + "\n"
+													+ finalTextView.getText());
+											System.out.println(firstname);
 
+										}
+
+									} else {
+										Log.d("score",
+												"Error: " + e.getMessage());
 									}
-
-								} else {
-									Log.d("score", "Error: " + e.getMessage());
 								}
-							}
-						});
+							});
+						} else {
+							Toast.makeText(
+									mContext,
+									"No Network Connection.\nNetwork Connection Required.",
+									Toast.LENGTH_LONG).show();
+						}
 					}
 				});
 
@@ -203,14 +210,22 @@ public class MainActivity extends Activity {
 						final String passedScore = scoreEdText.getText()
 								.toString();
 						final String passedQuizDesc = "IRAQuiz";
+						if ((firstNameText.getText().length() > 0
+								&& lastNameText.getText().length() > 0 && scoreEdText.getText()
+								.length() > 0)){
+							
+							// save to parse function call
+							saveToParse(passedScore, passedLastName,
+									passedFirstName, passedQuizDesc);
+							lastNameText.setText("");
+							firstNameText.setText("");
+							scoreEdText.setText("");
+						}else{
+							Toast.makeText(mContext, "Please enter all fields.", Toast.LENGTH_LONG).show();
+						}
+						
 
-						// save to parse function call
-						saveToParse(passedScore, passedLastName,
-								passedFirstName, passedQuizDesc);
-
-						lastNameText.setText("");
-						firstNameText.setText("");
-						scoreEdText.setText("");
+						
 					}
 
 				});
@@ -277,42 +292,51 @@ public class MainActivity extends Activity {
 
 					@Override
 					public void onClick(View v) {
-						// TODO Auto-generated method stub
-						ParseQuery<ParseObject> query = ParseQuery
-								.getQuery("SFQuiz");
-						query.findInBackground(new FindCallback<ParseObject>() {
-							public void done(List<ParseObject> quizScoreList,
-									ParseException e) {
-								if (e == null) {
-									Log.d("score",
-											"Retrieved " + quizScoreList.size()
-													+ " scores");
+						if (connectionStatus(mContext)) {
+							// TODO Auto-generated method stub
+							ParseQuery<ParseObject> query = ParseQuery
+									.getQuery("SFQuiz");
+							query.findInBackground(new FindCallback<ParseObject>() {
+								public void done(
+										List<ParseObject> quizScoreList,
+										ParseException e) {
+									if (e == null) {
+										Log.d("score", "Retrieved "
+												+ quizScoreList.size()
+												+ " scores");
 
-									myLinLayout.removeView(finalTextView);
-									myLinLayout.addView(finalTextView);
-									for (ParseObject scoreInfo : quizScoreList) {
-										final String firstname = scoreInfo
-												.getString("firstname");
-										String lastname = scoreInfo
-												.getString("lastname");
-										String score = scoreInfo
-												.getString("score");
-										// String testDesc =
-										// scoreInfo.getString("quizDescription");
+										myLinLayout.removeView(finalTextView);
+										myLinLayout.addView(finalTextView);
+										for (ParseObject scoreInfo : quizScoreList) {
+											final String firstname = scoreInfo
+													.getString("firstname");
+											String lastname = scoreInfo
+													.getString("lastname");
+											String score = scoreInfo
+													.getString("score");
+											// String testDesc =
+											// scoreInfo.getString("quizDescription");
 
-										finalTextView.setText(lastname + ", "
-												+ firstname + "     " + score
-												+ "\n"
-												+ finalTextView.getText());
-										System.out.println(firstname);
+											finalTextView.setText(lastname
+													+ ", " + firstname
+													+ "     " + score + "\n"
+													+ finalTextView.getText());
+											System.out.println(firstname);
 
+										}
+
+									} else {
+										Log.d("score",
+												"Error: " + e.getMessage());
 									}
-
-								} else {
-									Log.d("score", "Error: " + e.getMessage());
 								}
-							}
-						});
+							});
+						} else {
+							Toast.makeText(
+									mContext,
+									"No Network Connection.\nNetwork Connection Required.",
+									Toast.LENGTH_LONG).show();
+						}
 					}
 				});
 
@@ -330,14 +354,22 @@ public class MainActivity extends Activity {
 						final String passedScore = scoreEdText.getText()
 								.toString();
 						final String passedQuizDesc = "SFQuiz";
+						if ((firstNameText.getText().length() > 0
+								&& lastNameText.getText().length() > 0 && scoreEdText.getText()
+								.length() > 0)){
+							
+							// save to parse function call
+							saveToParse(passedScore, passedLastName,
+									passedFirstName, passedQuizDesc);
+							lastNameText.setText("");
+							firstNameText.setText("");
+							scoreEdText.setText("");
+						}else{
+							Toast.makeText(mContext, "Please enter all fields.", Toast.LENGTH_LONG).show();
+						}
+						
 
-						// save to parse function call
-						saveToParse(passedScore, passedLastName,
-								passedFirstName, passedQuizDesc);
-
-						lastNameText.setText("");
-						firstNameText.setText("");
-						scoreEdText.setText("");
+						
 					}
 
 				});
@@ -404,42 +436,51 @@ public class MainActivity extends Activity {
 
 					@Override
 					public void onClick(View arcV) {
-						// TODO Auto-generated method stub
-						ParseQuery<ParseObject> query = ParseQuery
-								.getQuery("ARCQuiz");
-						query.findInBackground(new FindCallback<ParseObject>() {
-							public void done(List<ParseObject> quizScoreList,
-									ParseException e) {
-								if (e == null) {
-									Log.d("score",
-											"Retrieved " + quizScoreList.size()
-													+ " scores");
+						if (connectionStatus(mContext)) {
+							// TODO Auto-generated method stub
+							ParseQuery<ParseObject> query = ParseQuery
+									.getQuery("ARCQuiz");
+							query.findInBackground(new FindCallback<ParseObject>() {
+								public void done(
+										List<ParseObject> quizScoreList,
+										ParseException e) {
+									if (e == null) {
+										Log.d("score", "Retrieved "
+												+ quizScoreList.size()
+												+ " scores");
 
-									myLinLayout.removeView(finalTextView);
-									myLinLayout.addView(finalTextView);
-									for (ParseObject scoreInfo : quizScoreList) {
-										final String firstname = scoreInfo
-												.getString("firstname");
-										String lastname = scoreInfo
-												.getString("lastname");
-										String score = scoreInfo
-												.getString("score");
-										// String testDesc =
-										// scoreInfo.getString("quizDescription");
+										myLinLayout.removeView(finalTextView);
+										myLinLayout.addView(finalTextView);
+										for (ParseObject scoreInfo : quizScoreList) {
+											final String firstname = scoreInfo
+													.getString("firstname");
+											String lastname = scoreInfo
+													.getString("lastname");
+											String score = scoreInfo
+													.getString("score");
+											// String testDesc =
+											// scoreInfo.getString("quizDescription");
 
-										finalTextView.setText(lastname + ", "
-												+ firstname + "     " + score
-												+ "\n"
-												+ finalTextView.getText());
-										System.out.println(firstname);
+											finalTextView.setText(lastname
+													+ ", " + firstname
+													+ "     " + score + "\n"
+													+ finalTextView.getText());
+											System.out.println(firstname);
 
+										}
+
+									} else {
+										Log.d("score",
+												"Error: " + e.getMessage());
 									}
-
-								} else {
-									Log.d("score", "Error: " + e.getMessage());
 								}
-							}
-						});
+							});
+						} else {
+							Toast.makeText(
+									mContext,
+									"No Network Connection.\nNetwork Connection Required.",
+									Toast.LENGTH_LONG).show();
+						}
 					}
 				});
 
@@ -458,20 +499,29 @@ public class MainActivity extends Activity {
 								.toString();
 						final String passedQuizDesc = "ARCQuiz";
 
-						// save to parse function call
-						saveToParse(passedScore, passedLastName,
-								passedFirstName, passedQuizDesc);
-
-						lastNameText.setText("");
-						firstNameText.setText("");
-						scoreEdText.setText("");
+						
+						if ((firstNameText.getText().length() > 0
+								&& lastNameText.getText().length() > 0 && scoreEdText.getText()
+								.length() > 0)){
+							
+							// save to parse function call
+							saveToParse(passedScore, passedLastName,
+									passedFirstName, passedQuizDesc);
+							lastNameText.setText("");
+							firstNameText.setText("");
+							scoreEdText.setText("");
+						}else{
+							Toast.makeText(mContext, "Please enter all fields.", Toast.LENGTH_LONG).show();
+						}
+						
+						
 					}
-
 				});
 
 				// add Views (buttons)
 				myLinLayout.addView(backButon);
 				myLinLayout.addView(scoreButton);
+
 				myLinLayout.addView(saveButton);
 
 			}
@@ -505,7 +555,7 @@ public class MainActivity extends Activity {
 								Toast.LENGTH_LONG).show();
 					} else {
 						System.out.println("success saving!!");
-						Toast.makeText(mContext, "Success Saving Score!",
+						Toast.makeText(mContext, "Score saved!",
 								Toast.LENGTH_LONG).show();
 
 					}
@@ -514,7 +564,8 @@ public class MainActivity extends Activity {
 			});
 
 		} else {
-			Toast.makeText(mContext,
+			Toast.makeText(
+					mContext,
 					"No Network connection! \nNetwork connection is required to save a score.",
 					Toast.LENGTH_LONG).show();
 		}
