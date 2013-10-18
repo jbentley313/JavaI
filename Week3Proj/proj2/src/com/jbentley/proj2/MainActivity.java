@@ -1,5 +1,9 @@
 package com.jbentley.proj2;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import com.example.proj2.R;
@@ -78,8 +82,8 @@ public class MainActivity extends Activity {
 		myLayoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT,
 				LayoutParams.WRAP_CONTENT);
 		titleTextView.setLayoutParams(myLayoutParams);
-		titleTextView.setText(R.string.quiz_scores);
-		titleTextView.setTextSize(33);
+		titleTextView.setText(R.string.title_text);
+		titleTextView.setTextSize(30);
 
 		final TextView scoreTextView = new TextView(this);
 		scoreTextView.setLayoutParams(myLayoutParams);
@@ -89,12 +93,12 @@ public class MainActivity extends Activity {
 		myLayoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT,
 				LayoutParams.WRAP_CONTENT);
 		finalTextView.setLayoutParams(myLayoutParams);
-
 		finalTextView.setTextSize(20);
 
-		// myLinLayout.addView(finalTextView);
+		myLinLayout.addView(titleTextView);
+		// ListView scoreListView = new ListView(mContext);
 
-		// button creation
+		// Intro to Recording button
 		final Button myButton = new Button(this);
 		myButton.setText(R.string.IRA);
 		myButton.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
@@ -148,31 +152,49 @@ public class MainActivity extends Activity {
 
 					@Override
 					public void onClick(View v) {
+						
+						//check connection
 						if (connectionStatus(mContext)) {
 							// TODO Auto-generated method stub
+							
+							
+							
+							
+							
+							//parse query
 							ParseQuery<ParseObject> query = ParseQuery
 									.getQuery("IRAQuiz");
+							query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
 							query.findInBackground(new FindCallback<ParseObject>() {
 								public void done(
 										List<ParseObject> quizScoreList,
 										ParseException e) {
 									if (e == null) {
-										Log.d("score", "Retrieved "
+										Log.d(TAG + "score", "Retrieved "
 												+ quizScoreList.size()
 												+ " scores");
-
+										
+										
+										
+										
+										
+										
+										
+										finalTextView.setText("");
 										myLinLayout.removeView(finalTextView);
 										myLinLayout.addView(finalTextView);
+										
+										//create text from JSON parse query
 										for (ParseObject scoreInfo : quizScoreList) {
 											final String firstname = scoreInfo
 													.getString("firstname");
 											String lastname = scoreInfo
 													.getString("lastname");
-											String score = scoreInfo
-													.getString("score");
-											// String testDesc =
-											// scoreInfo.getString("quizDescription");
-
+											String score = Integer
+													.toString(scoreInfo
+															.getInt("score"));
+											
+											//set final view
 											finalTextView.setText(lastname
 													+ ", " + firstname
 													+ "     " + score + "\n"
@@ -211,21 +233,22 @@ public class MainActivity extends Activity {
 								.toString();
 						final String passedQuizDesc = "IRAQuiz";
 						if ((firstNameText.getText().length() > 0
-								&& lastNameText.getText().length() > 0 && scoreEdText.getText()
-								.length() > 0)){
-							
+								&& lastNameText.getText().length() > 0 && scoreEdText
+								.getText().length() > 0)) {
+
 							// save to parse function call
 							saveToParse(passedScore, passedLastName,
 									passedFirstName, passedQuizDesc);
+							//reset fields
 							lastNameText.setText("");
 							firstNameText.setText("");
 							scoreEdText.setText("");
-						}else{
-							Toast.makeText(mContext, "Please enter all fields.", Toast.LENGTH_LONG).show();
-						}
-						
+						} else {
 
-						
+							// alert fields missing
+							makeSomeToast(mContext);
+						}
+
 					}
 
 				});
@@ -238,7 +261,8 @@ public class MainActivity extends Activity {
 			}
 
 		});
-
+		
+		//Sound Foundations button
 		final Button myButton2 = new Button(this);
 		myButton2.setText(R.string.SF);
 		myButton2.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
@@ -296,6 +320,7 @@ public class MainActivity extends Activity {
 							// TODO Auto-generated method stub
 							ParseQuery<ParseObject> query = ParseQuery
 									.getQuery("SFQuiz");
+							query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
 							query.findInBackground(new FindCallback<ParseObject>() {
 								public void done(
 										List<ParseObject> quizScoreList,
@@ -305,15 +330,17 @@ public class MainActivity extends Activity {
 												+ quizScoreList.size()
 												+ " scores");
 
+										finalTextView.setText("");
 										myLinLayout.removeView(finalTextView);
 										myLinLayout.addView(finalTextView);
 										for (ParseObject scoreInfo : quizScoreList) {
-											final String firstname = scoreInfo
+											String firstname = scoreInfo
 													.getString("firstname");
 											String lastname = scoreInfo
 													.getString("lastname");
-											String score = scoreInfo
-													.getString("score");
+											String score = Integer
+													.toString(scoreInfo
+															.getInt("score"));
 											// String testDesc =
 											// scoreInfo.getString("quizDescription");
 
@@ -355,21 +382,21 @@ public class MainActivity extends Activity {
 								.toString();
 						final String passedQuizDesc = "SFQuiz";
 						if ((firstNameText.getText().length() > 0
-								&& lastNameText.getText().length() > 0 && scoreEdText.getText()
-								.length() > 0)){
-							
+								&& lastNameText.getText().length() > 0 && scoreEdText
+								.getText().length() > 0)) {
+
 							// save to parse function call
 							saveToParse(passedScore, passedLastName,
 									passedFirstName, passedQuizDesc);
 							lastNameText.setText("");
 							firstNameText.setText("");
 							scoreEdText.setText("");
-						}else{
-							Toast.makeText(mContext, "Please enter all fields.", Toast.LENGTH_LONG).show();
-						}
-						
+						} else {
 
-						
+							// alert fields missing
+							makeSomeToast(mContext);
+						}
+
 					}
 
 				});
@@ -382,7 +409,7 @@ public class MainActivity extends Activity {
 			}
 
 		});
-
+		//Advanced Recording button
 		final Button myButton3 = new Button(this);
 		myButton3.setText(R.string.ARC);
 		myButton3.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
@@ -440,6 +467,7 @@ public class MainActivity extends Activity {
 							// TODO Auto-generated method stub
 							ParseQuery<ParseObject> query = ParseQuery
 									.getQuery("ARCQuiz");
+							query.setCachePolicy(ParseQuery.CachePolicy.NETWORK_ELSE_CACHE);
 							query.findInBackground(new FindCallback<ParseObject>() {
 								public void done(
 										List<ParseObject> quizScoreList,
@@ -449,6 +477,7 @@ public class MainActivity extends Activity {
 												+ quizScoreList.size()
 												+ " scores");
 
+										finalTextView.setText("");
 										myLinLayout.removeView(finalTextView);
 										myLinLayout.addView(finalTextView);
 										for (ParseObject scoreInfo : quizScoreList) {
@@ -456,16 +485,15 @@ public class MainActivity extends Activity {
 													.getString("firstname");
 											String lastname = scoreInfo
 													.getString("lastname");
-											String score = scoreInfo
-													.getString("score");
-											// String testDesc =
-											// scoreInfo.getString("quizDescription");
+											String score = Integer
+													.toString(scoreInfo
+															.getInt("score"));
 
 											finalTextView.setText(lastname
 													+ ", " + firstname
 													+ "     " + score + "\n"
 													+ finalTextView.getText());
-											System.out.println(firstname);
+					
 
 										}
 
@@ -499,22 +527,21 @@ public class MainActivity extends Activity {
 								.toString();
 						final String passedQuizDesc = "ARCQuiz";
 
-						
 						if ((firstNameText.getText().length() > 0
-								&& lastNameText.getText().length() > 0 && scoreEdText.getText()
-								.length() > 0)){
-							
+								&& lastNameText.getText().length() > 0 && scoreEdText
+								.getText().length() > 0)) {
+
 							// save to parse function call
 							saveToParse(passedScore, passedLastName,
 									passedFirstName, passedQuizDesc);
 							lastNameText.setText("");
 							firstNameText.setText("");
 							scoreEdText.setText("");
-						}else{
-							Toast.makeText(mContext, "Please enter all fields.", Toast.LENGTH_LONG).show();
+						} else {
+							// alert fields missing
+							makeSomeToast(mContext);
 						}
-						
-						
+
 					}
 				});
 
@@ -538,9 +565,11 @@ public class MainActivity extends Activity {
 	// Save to parse function
 	public void saveToParse(String pScore, String pLname, String pFname,
 			String pQDesc) {
+
 		if (connectionStatus(mContext)) {
+			int pScoreInt = Integer.parseInt(pScore);
 			ParseObject quizScore = new ParseObject(pQDesc);
-			quizScore.put("score", pScore);
+			quizScore.put("score", pScoreInt);
 			quizScore.put("lastname", pLname);
 			quizScore.put("firstname", pFname);
 			quizScore.put("quizDescription", pQDesc);
@@ -564,6 +593,7 @@ public class MainActivity extends Activity {
 			});
 
 		} else {
+
 			Toast.makeText(
 					mContext,
 					"No Network connection! \nNetwork connection is required to save a score.",
@@ -571,6 +601,7 @@ public class MainActivity extends Activity {
 		}
 	}
 
+	// connection test
 	public Boolean connectionStatus(Context mContext) {
 
 		Boolean conn = false;
@@ -586,6 +617,13 @@ public class MainActivity extends Activity {
 
 		return conn;
 
+	}
+
+	// toast function (alert for required fields)
+
+	public void makeSomeToast(Context mContext) {
+		Toast.makeText(mContext, "Please enter all fields.", Toast.LENGTH_LONG)
+				.show();
 	}
 
 }

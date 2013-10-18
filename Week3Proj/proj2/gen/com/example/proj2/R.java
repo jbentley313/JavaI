@@ -49,7 +49,7 @@ public final class R {
         public static final int firstName=0x7f050008;
         public static final int hello_world=0x7f050002;
         public static final int lastname=0x7f050007;
-        public static final int quiz_scores=0x7f050003;
+        public static final int title_text=0x7f050003;
     }
     public static final class style {
         /** 
