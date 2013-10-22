@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">J1FinalProject</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="student_last_name">Student Last Name</string>
+    <string name="first_name">First Name</string>
+    <string name="score">Score</string>
+    <string name="sound_foundations">Sound Foundations</string>
+    <string name="intro_to_recording">Intro to Recording</string>
+    <string name="advanced_recording">Advanced Recording</string>
+    <string name="trade_school_grade_sheet">Trade School Grade Sheet</string>
+    <string name="save">Save</string>
+    <string name="back">Back</string>
+
+</resources>

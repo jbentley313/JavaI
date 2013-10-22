@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        style="@style/TitleStyle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/trade_school_grade_sheet" />
+
+    <Button
+        android:id="@+id/SFButton"
+        style="@style/CourseButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sound_foundations" />
+
+    <Button
+        android:id="@+id/IRAButton"
+        style="@style/CourseButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/intro_to_recording" />
+
+    <Button
+        android:id="@+id/ARCButton"
+        style="@style/CourseButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/advanced_recording" />
+
+</LinearLayout>
