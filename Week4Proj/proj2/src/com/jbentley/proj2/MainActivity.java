@@ -43,6 +43,7 @@ public class MainActivity extends Activity {
 		mContext = this;
 		final connectivityClass neConn = new connectivityClass();
 
+		// buttons from xml
 		Button SFbtn = (Button) findViewById(R.id.SFButton);
 		Button IRAbtn = (Button) findViewById(R.id.IRAButton);
 		Button ARCbtn = (Button) findViewById(R.id.ARCButton);
@@ -117,7 +118,6 @@ public class MainActivity extends Activity {
 
 				// SF Display button
 
-				// Display Scores button
 				Button scoreButton = (Button) findViewById(R.id.DisplayButton);
 
 				scoreButton.setOnClickListener(new View.OnClickListener() {
@@ -239,7 +239,6 @@ public class MainActivity extends Activity {
 				});
 
 				// IRA Display Button
-
 				Button scoreButton = (Button) findViewById(R.id.DisplayButton);
 
 				scoreButton.setOnClickListener(new View.OnClickListener() {
@@ -293,8 +292,7 @@ public class MainActivity extends Activity {
 			}
 		});
 
-		
-		//Advanced Recording Button
+		// Advanced Recording Button
 		ARCbtn.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -360,7 +358,7 @@ public class MainActivity extends Activity {
 					}
 
 				});
-				
+
 				// ARC display button
 				Button scoreButton = (Button) findViewById(R.id.DisplayButton);
 
@@ -418,13 +416,14 @@ public class MainActivity extends Activity {
 
 	}
 
+	// toast (alert)
 	public void makeSomeToast(Context mContext) {
 		Toast.makeText(mContext, "Please enter all fields.", Toast.LENGTH_LONG)
 				.show();
 	}
 
-	public void passThisToast(String string) {
-		Toast.makeText(mContext, string, Toast.LENGTH_LONG).show();
+	public void passThisToast() {
+		Toast.makeText(this, "Yep", Toast.LENGTH_LONG).show();
 	}
 
 }
