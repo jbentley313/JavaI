@@ -8,10 +8,8 @@ import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -239,11 +237,9 @@ public class MainActivity extends Activity {
 
 					}
 				});
-				
-				//IRA Display Button
-				
 
-				// Display Scores button
+				// IRA Display Button
+
 				Button scoreButton = (Button) findViewById(R.id.DisplayButton);
 
 				scoreButton.setOnClickListener(new View.OnClickListener() {
@@ -297,6 +293,8 @@ public class MainActivity extends Activity {
 			}
 		});
 
+		
+		//Advanced Recording Button
 		ARCbtn.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -362,11 +360,8 @@ public class MainActivity extends Activity {
 					}
 
 				});
-				// ARC display button
 				
-				// SF Display button
-
-				// Display Scores button
+				// ARC display button
 				Button scoreButton = (Button) findViewById(R.id.DisplayButton);
 
 				scoreButton.setOnClickListener(new View.OnClickListener() {
@@ -423,20 +418,9 @@ public class MainActivity extends Activity {
 
 	}
 
-	// if (neConn.connectionStatus(mContext)) {
-	// saveClass saver = new saveClass();
-	// System.out.println("yepppppppzzzzz");
-	// }
-
-	// toast function (alert for required fields)
-
-	// if (passedCourseString == (R.string.sound_foundations)) {
-	// System.out.println("you chose sf");
-	// }
-
 	public void makeSomeToast(Context mContext) {
 		Toast.makeText(mContext, "Please enter all fields.", Toast.LENGTH_LONG)
-		.show();
+				.show();
 	}
 
 	public void passThisToast(String string) {
