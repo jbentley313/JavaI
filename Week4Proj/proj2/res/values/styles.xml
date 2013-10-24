@@ -31,8 +31,14 @@
         <item name ="android:paddingBottom">10sp</item>  
     </style>
     
-    <style name="Scores">
+    <style name="Scores" >
         <item name="android:textColor" >@android:color/holo_blue_light</item>
+        <item name="android:layout_width">fill_parent</item>
+        
+        
+        
     </style>
+    
+    
     
 </resources>

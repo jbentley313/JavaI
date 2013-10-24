@@ -51,6 +51,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/back"/>
+        
+        <Button
+            android:id="@+id/DisplayButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/display_scores"/>
+        
+        <TextView 
+            android:id="@+id/scoresTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""/>
+            
+            
+            
+            
+                    
     </LinearLayout>
 
 </LinearLayout>

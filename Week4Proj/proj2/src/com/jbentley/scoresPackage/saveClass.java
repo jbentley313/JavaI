@@ -1,13 +1,20 @@
 package com.jbentley.scoresPackage;
+import android.app.Application;
 import android.content.Context;
+import com.jbentley.*;
+
+import android.view.View;
 import android.widget.Toast;
 
+import com.jbentley.proj2.MainActivity;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.SaveCallback;
 
 public class saveClass {
-	Context mContext;
+	
+	
+
 	
 	
 	
@@ -16,6 +23,7 @@ public class saveClass {
 	// Save to parse function
 		public void saveToParse(String pScore, String pLname, String pFname,
 				String pQDesc) {
+//final MainActivity newMain = (MainActivity) new MainActivity();
 
 			
 				int pScoreInt = Integer.parseInt(pScore);
@@ -25,19 +33,20 @@ public class saveClass {
 				quizScore.put("firstname", pFname);
 				quizScore.put("quizDescription", pQDesc);
 				quizScore.saveInBackground(new SaveCallback() {
+					
 					//
 					public void done(ParseException e) {
 						if (e != null) {
-
-							System.out.println("error saving!!!!!");
-							Toast.makeText(mContext,
-									"Sorry, the score did NOT save.",
-									Toast.LENGTH_LONG).show();
+							
+//							System.out.println("error saving!!!!!");
+//							newMain.passThisToast("Sorry, there was an error saving.");
+//							Toast.makeText(saveContext,
+//									"Sorry, the score did NOT save.",
+//									Toast.LENGTH_LONG).show();
 						} else {
-							System.out.println("success saving!!");
-							Toast.makeText(mContext, "Score saved!",
-									Toast.LENGTH_LONG).show();
-
+//							System.out.println("success saving!!");
+////							Toast.makeText(saveContext, "yep", Toast.LENGTH_LONG).show();
+//							newMain.passThisToast("Score saved!!");
 						}
 					}
 
